@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ITBook</string>
+    <string name="title_home">Trang Chủ</string>
+    <string name="title_favorite_books">Yêu Thích</string>
+    <string name="title_settings">Cài Đặt</string>
+    <string name="title_category_name">Thể Loại</string>
+    <string name="title_book">Tiêu Đề</string>
+    <string name="title_subtitle_book">Phụ đề</string>
+    <string name="title_subtitle_authors">Tác Giả</string>
+    <string name="title_similar_book">Sách Tương Tự</string>
+    <string name="title_information_book">Thông Tin</string>
+    <string name="title_description_book">Mô Tả</string>
+    <string name="title_link_book">Link mua sách</string>
+    <string name="title_app_owner">Tạo bởi:</string>
+    <string name="title_version">Phiên bản:</string>
+    <string name="title_contact">Liên hệ:</string>
+    <string name="title_app_language">Ngôn Ngữ</string>
+    <string name="title_app_information">Thông Tin App</string>
+
+    <string name="text_title_welcome">Bạn đã sẵn sàng đọc chưa?</string>
+    <string name="text_content_welcome">Hãy  chọn một cuốn sách bạn thích.</string>
+    <string name="text_content_description_book">nội dung mô tả</string>
+    <string name="text_rating_book">đánh giá</string>
+    <string name="text_publisher_book">người đăng</string>
+    <string name="text_language_book">ngôn ngữ</string>
+    <string name="text_pages_book">số trang</string>
+    <string name="text_year_book">năm</string>
+    <string name="text_favorite_books">Danh Sách Yêu Thích</string>
+    <string name="text_default_books_count">cuốn.</string>
+    <string name="text_search_result">kết quả tìm kiếm</string>
+    <string name="text_internet_on">Đã kết nối internet!</string>
+    <string name="text_internet_off">Mất kết nối internet!</string>
+
+    <string name="error_internet_not_connection">Kiểm tra lại kết nối internet của bạn!</string>
+    <string name="error_search">Không thể tìm kiếm</string>
+    <string name="error_load_data">Không thể tải sách</string>
+</resources>
