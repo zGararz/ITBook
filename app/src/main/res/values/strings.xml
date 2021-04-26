@@ -3,4 +3,9 @@
     <string name="title_home">Home</string>
     <string name="title_favorite_books">Favorite Books</string>
     <string name="title_settings">Settings</string>
+    <string name="title_welcome">Are you ready to read?</string>
+    <string name="content_welcome">"Let's choose a book which you like."</string>
+    <string name="category_name">Category</string>
+    <string name="title_book">Title</string>
+    <string name="subtitle_book">Subtitle</string>
 </resources>
