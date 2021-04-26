@@ -1,5 +1,6 @@
 package com.example.itbook.data.model
 
+import android.content.ContentValues
 import android.database.Cursor
 import org.json.JSONObject
 
@@ -50,6 +51,22 @@ class Book(
         cursor.getInt(cursor.getColumnIndex(RATING)),
         cursor.getString(cursor.getColumnIndex(DESC))
     )
+
+    fun getContentValue() = ContentValues().apply {
+        put(ISBN13, isbn13)
+        put(TITLE, title)
+        put(SUBTITLE, subtitle)
+        put(IMAGE, image)
+        put(URL, url)
+        put(AUTHORS, authors)
+        put(PUBLISHER, publisher)
+        put(LANGUAGE, language)
+        put(ISBN10, isbn10)
+        put(PAPERS, pages)
+        put(YEAR, year)
+        put(RATING, rating)
+        put(DESC, desc)
+    }
 
     companion object {
         const val BOOKS = "books"
