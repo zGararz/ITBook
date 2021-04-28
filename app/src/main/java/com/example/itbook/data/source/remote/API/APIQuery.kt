@@ -10,5 +10,7 @@ object APIQuery {
 
     fun queryBooks(query: String, page: Int): String = "$BASE_URL/$SEARCH/$query/$page"
 
+    fun queryBooks(query: String): String = "$BASE_URL/$SEARCH/$query"
+
     fun queryBook(isbn13: String): String = "$BASE_URL/$NEW"
 }
