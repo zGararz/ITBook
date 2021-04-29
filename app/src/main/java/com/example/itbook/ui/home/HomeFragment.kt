@@ -1,6 +1,7 @@
 package com.example.itbook.ui.home
 
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import com.example.itbook.R
 import com.example.itbook.base.BaseFragment
 import com.example.itbook.data.model.PreviewCategory
@@ -12,6 +13,7 @@ import com.example.itbook.data.source.remote.BookRemoteHandler
 import com.example.itbook.data.source.remote.BooksRemoteDataSource
 import com.example.itbook.ui.adapter.CategoryAdapter
 import com.example.itbook.ui.adapter.PreviewCategoryAdapter
+import com.example.itbook.ui.detailcategory.DetailCategoryFragment
 import com.example.itbook.ui.dialog.LoadingDialogFragment
 import kotlinx.android.synthetic.main.fragment_home.*
 
@@ -23,7 +25,7 @@ class HomeFragment : BaseFragment(), HomeContract.View {
     private var presenter: HomePresenter? = null
     private val categoryAdapter = CategoryAdapter(this::onItemCategoryClick)
     private val previewCategoryAdapter =
-        PreviewCategoryAdapter(this::onItemCategoryClick, this::onItemBookClick)
+        PreviewCategoryAdapter(this::onItemPreviewCategoryClick, this::onItemBookClick)
     private var loadingDialogFragment: LoadingDialogFragment? = null
 
     override fun initViews() {
@@ -80,6 +82,19 @@ class HomeFragment : BaseFragment(), HomeContract.View {
     }
 
     private fun onItemCategoryClick(position: Int) {
+        categories?.let {
+            val fragment = DetailCategoryFragment()
+            fragment.arguments = bundleOf(DetailCategoryFragment.STRING_CATEGORY to it[position])
+            addFragment(fragment)
+        }
+    }
+
+    private fun onItemPreviewCategoryClick(position: Int) {
+        val fragment = DetailCategoryFragment()
+        fragment.arguments = bundleOf(
+            DetailCategoryFragment.STRING_CATEGORY to previewCategories[position].name
+        )
+        addFragment(fragment)
     }
 
     private fun onItemBookClick(currentCategory: Int, position: Int) {
