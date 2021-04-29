@@ -8,4 +8,40 @@
     <string name="category_name">Category</string>
     <string name="title_book">Title</string>
     <string name="subtitle_book">Subtitle</string>
+
+    <string name="category_new">New</string>
+    <string name="category_basic">Basic</string>
+    <string name="category_.net_framework">.NET Framework</string>
+    <string name="category_design">Design</string>
+    <string name="category_programing">Programing</string>
+    <string name="category_business">Business</string>
+    <string name="category_software">Software</string>
+    <string name="category_sql">SQL</string>
+    <string name="category_microsoft_access">Microsoft Access</string>
+    <string name="category_microsoft_office">Microsoft Office</string>
+    <string name="category_database">Database</string>
+    <string name="category_big_data">Big Data</string>
+    <string name="category_for_dummies">For Dummies</string>
+    <string name="category_html">HTML</string>
+    <string name="category_android">Android</string>
+    <string name="category_ios">IOS</string>
+    <string name="category_linux">Linux</string>
+
+    <string-array name="categories">
+        <item>@string/category_programing</item>
+        <item>@string/category_software</item>
+        <item>@string/category_sql</item>
+        <item>@string/category_database</item>
+        <item>@string/category_big_data</item>
+        <item>@string/category_for_dummies</item>
+        <item>@string/category_html</item>
+        <item>@string/category_android</item>
+        <item>@string/category_ios</item>
+        <item>@string/category_linux</item>
+        <item>@string/category_business</item>
+        <item>@string/category_basic</item>
+        <item>@string/category_.net_framework</item>
+        <item>@string/category_design</item>
+        <item>@string/category_new</item>
+    </string-array>
 </resources>

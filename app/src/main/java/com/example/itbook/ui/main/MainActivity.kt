@@ -6,14 +6,17 @@ import androidx.fragment.app.Fragment
 import com.example.itbook.R
 import com.example.itbook.base.BaseActivity
 import com.example.itbook.ui.favorite.FavoriteFragment
-import com.example.itbook.ui.home.HomeFragment
 import com.example.itbook.ui.settings.SettingsFragment
+import com.example.itbook.ui.home.HomeFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity() : BaseActivity() {
     override val layoutResource = R.layout.activity_main
 
+    private val favoriteFragment = FavoriteFragment()
+    private val homeFragment = HomeFragment()
+    private val settingsFragment = SettingsFragment()
     override fun initComponents() {
         bottomNav.setOnNavigationItemSelectedListener(onBottomNavigationListener)
         bottomNav.selectedItemId = R.id.menuHome
@@ -22,9 +25,9 @@ class MainActivity() : BaseActivity() {
     private val onBottomNavigationListener =
         BottomNavigationView.OnNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.menuFavoriteBooks -> replaceFragment(FavoriteFragment())
-                R.id.menuHome -> replaceFragment(HomeFragment())
-                R.id.menuSettings -> replaceFragment(SettingsFragment())
+                R.id.menuFavoriteBooks -> replaceFragment(favoriteFragment)
+                R.id.menuHome -> replaceFragment(homeFragment)
+                R.id.menuSettings -> replaceFragment(settingsFragment)
             }
             true
         }
