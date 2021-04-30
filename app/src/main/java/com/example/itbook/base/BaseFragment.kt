@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.itbook.R
 
 abstract class BaseFragment : Fragment() {
     protected abstract val layoutResource: Int
@@ -20,6 +21,28 @@ abstract class BaseFragment : Fragment() {
         initViews()
         initData()
         initListeners()
+    }
+
+    protected fun addFragment(
+        fragment: Fragment,
+        enter: Int,
+        exit: Int,
+        popEnter: Int,
+        popExit: Int
+    ) {
+        activity?.supportFragmentManager
+            ?.beginTransaction()
+            ?.add(R.id.frameRoot, fragment)
+            ?.setCustomAnimations(enter, exit, popEnter, popExit)
+            ?.commit()
+    }
+
+    protected fun addFragment(fragment: Fragment) {
+        activity?.supportFragmentManager
+            ?.beginTransaction()
+            ?.replace(R.id.frameRoot, fragment)
+            ?.addToBackStack(null)
+            ?.commit()
     }
 
     abstract fun initViews()

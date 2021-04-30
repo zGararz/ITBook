@@ -30,7 +30,7 @@ class HomePresenter(
             override fun onSuccess(data: List<Book>) {
                 previewCategories.add(
                     PreviewCategory(
-                        categories[0],
+                        categories[categories.size - 1],
                         data.toMutableList()
                     )
                 )
