@@ -10,10 +10,10 @@ class BookDaoImp(booksDatabase: BooksDatabase) : BookDao {
     override fun insertBook(book: Book) =
         writeableDB.insert(BooksDatabase.TABLE_NAME, null, book.getContentValue())
 
-    override fun getBook(isbn13: String): Book? {
+    override fun getBook(id: String): Book? {
         var book: Book? = null
-        val getQuery = "SELECT * FROM ${BooksDatabase.TABLE_NAME} WHERE BookEntry.ISBN13 = ?"
-        val selectionArg = arrayOf(isbn13)
+        val getQuery = "SELECT * FROM ${BooksDatabase.TABLE_NAME} WHERE ${Book.ISBN13} = ?"
+        val selectionArg = arrayOf(id)
         val cursor = readableDB.rawQuery(getQuery, selectionArg)
 
         cursor.also {
@@ -42,10 +42,10 @@ class BookDaoImp(booksDatabase: BooksDatabase) : BookDao {
         return books
     }
 
-    override fun deleteBook(isbn13: String): Int =
+    override fun deleteBook(id: String): Int =
         writeableDB.delete(
             BooksDatabase.TABLE_NAME,
             "${Book.ISBN13} = ?",
-            arrayOf(isbn13)
+            arrayOf(id)
         )
 }

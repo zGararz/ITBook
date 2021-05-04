@@ -2,7 +2,7 @@ package com.example.itbook.data.source.remote
 
 import com.example.itbook.data.model.Book
 import com.example.itbook.data.source.BooksDataSource
-import com.example.itbook.utils.LoadDataAsynTask
+import com.example.itbook.utils.LoadDataAsyncTask
 import com.example.itbook.utils.OnDataLoadCallBack
 import org.json.JSONObject
 
@@ -12,7 +12,7 @@ class BooksRemoteDataSource private constructor(
 ) : BooksDataSource.Remote {
 
     override fun getRemoteBooks(query: String, callback: OnDataLoadCallBack<List<Book>>) {
-        LoadDataAsynTask(callback) {
+        LoadDataAsyncTask(callback) {
             bookRemoteHandler.run { jsonsToBooks(JSONObject(getJsonFromUrl(query))) }
         }.execute()
     }

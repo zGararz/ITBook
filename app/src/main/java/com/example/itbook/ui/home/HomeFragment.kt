@@ -4,6 +4,7 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 import com.example.itbook.R
 import com.example.itbook.base.BaseFragment
+import com.example.itbook.data.model.Book
 import com.example.itbook.data.model.PreviewCategory
 import com.example.itbook.data.repository.BooksRepository
 import com.example.itbook.data.source.local.BooksLocalDataSource
@@ -13,9 +14,12 @@ import com.example.itbook.data.source.remote.BookRemoteHandler
 import com.example.itbook.data.source.remote.BooksRemoteDataSource
 import com.example.itbook.ui.adapter.CategoryAdapter
 import com.example.itbook.ui.adapter.PreviewCategoryAdapter
+import com.example.itbook.ui.detailbook.DetailBookFragment
 import com.example.itbook.ui.detailcategory.DetailCategoryFragment
 import com.example.itbook.ui.dialog.LoadingDialogFragment
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.preview_category.*
+import org.json.JSONException
 
 class HomeFragment : BaseFragment(), HomeContract.View {
     override val layoutResource = R.layout.fragment_home
@@ -67,8 +71,13 @@ class HomeFragment : BaseFragment(), HomeContract.View {
         this.previewCategories = previewCategories.toMutableList()
     }
 
-    override fun showError(error: String) {
-        Toast.makeText(activity, error, Toast.LENGTH_LONG).show()
+    override fun showError(error: Exception?) {
+        var errorMessage = ""
+        when (error) {
+            is JSONException -> errorMessage = resources.getString(R.string.error_internet_not_connection)
+        }
+        isSetup = false
+        Toast.makeText(activity, errorMessage, Toast.LENGTH_LONG).show()
     }
 
     override fun showLoading(isShow: Boolean) {
@@ -84,7 +93,7 @@ class HomeFragment : BaseFragment(), HomeContract.View {
     private fun onItemCategoryClick(position: Int) {
         categories?.let {
             val fragment = DetailCategoryFragment()
-            fragment.arguments = bundleOf(DetailCategoryFragment.STRING_CATEGORY to it[position])
+            fragment.arguments = bundleOf(Book.CATEGORY to it[position])
             addFragment(fragment)
         }
     }
@@ -92,11 +101,16 @@ class HomeFragment : BaseFragment(), HomeContract.View {
     private fun onItemPreviewCategoryClick(position: Int) {
         val fragment = DetailCategoryFragment()
         fragment.arguments = bundleOf(
-            DetailCategoryFragment.STRING_CATEGORY to previewCategories[position].name
+            Book.CATEGORY to previewCategories[position].name
         )
         addFragment(fragment)
     }
 
     private fun onItemBookClick(currentCategory: Int, position: Int) {
+        val fragment = DetailBookFragment()
+        fragment.arguments = bundleOf(
+            Book.ISBN13 to previewCategories[currentCategory].books[position].isbn13
+        )
+        addFragment(fragment)
     }
 }

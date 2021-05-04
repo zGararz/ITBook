@@ -1,10 +1,10 @@
 package com.example.itbook.data.source.remote.API
 
 object APIQuery {
-    const val BASE_URL = "https://api.itbook.store/1.0"
-    const val SEARCH = "search"
-    const val NEW = "new"
-    const val BOOKS = "books"
+    private const val BASE_URL = "https://api.itbook.store/1.0"
+    private const val SEARCH = "search"
+    private const val NEW = "new"
+    private const val BOOKS = "books"
 
     fun queryNews(): String = "$BASE_URL/$NEW"
 
@@ -12,5 +12,5 @@ object APIQuery {
 
     fun queryBooks(query: String): String = "$BASE_URL/$SEARCH/$query"
 
-    fun queryBook(isbn13: String): String = "$BASE_URL/$NEW"
+    fun queryBook(isbn13: String): String = "$BASE_URL/$BOOKS/$isbn13"
 }

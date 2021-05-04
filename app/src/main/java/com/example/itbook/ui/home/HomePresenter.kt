@@ -13,11 +13,9 @@ class HomePresenter(
 ) : HomeContract.Presenter {
 
     private val previewCategories = mutableListOf<PreviewCategory>()
-    private var error = ""
+    private var error: Exception? = null
 
-    override fun start() {
-        getPreviewCategories()
-    }
+    override fun start() = getPreviewCategories()
 
     override fun getPreviewCategories() {
         getNewBooks()
@@ -28,16 +26,15 @@ class HomePresenter(
         view.showLoading(true)
         repository.getRemoteBooks(APIQuery.queryNews(), object : OnDataLoadCallBack<List<Book>> {
             override fun onSuccess(data: List<Book>) {
-                previewCategories.add(
-                    PreviewCategory(
-                        categories[categories.size - 1],
-                        data.toMutableList()
-                    )
-                )
+                val books = data.toMutableList()
+
+                books.shuffle()
+                previewCategories.add(PreviewCategory(categories[categories.size - 1], books))
                 view.showPreviewCategories(previewCategories)
+                view.showLoading(false)
             }
 
-            override fun onFail(message: String) {
+            override fun onFail(message: Exception?) {
                 error = message
                 view.showError(error)
                 view.showLoading(false)
@@ -56,20 +53,22 @@ class HomePresenter(
             repository.getRemoteBooks(
                 APIQuery.queryBooks(categories[categoryPosition]),
                 object : OnDataLoadCallBack<List<Book>> {
+
                     override fun onSuccess(data: List<Book>) {
-                        previewCategory.books = data.toMutableList()
+                        val books = data.toMutableList()
+
+                        books.shuffle()
+                        previewCategory.books = books
                         previewCategories.add(
                             previewCategory
                         )
                         view.showPreviewCategories(previewCategories)
-                        view.showLoading(false)
                     }
 
-                    override fun onFail(message: String) {
-                        if (message != error) {
+                    override fun onFail(message: Exception?) {
+                        if (message.toString() != error.toString()) {
                             error = message
                             view.showError(error)
-                            view.showLoading(false)
                         }
                     }
                 }

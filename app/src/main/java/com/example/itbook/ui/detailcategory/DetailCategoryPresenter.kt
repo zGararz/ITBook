@@ -4,6 +4,7 @@ import com.example.itbook.data.model.Book
 import com.example.itbook.data.repository.BooksRepository
 import com.example.itbook.data.source.remote.API.APIQuery
 import com.example.itbook.utils.OnDataLoadCallBack
+import java.lang.Exception
 
 class DetailCategoryPresenter(
     private val view: DetailCategoryFragment,
@@ -45,7 +46,7 @@ class DetailCategoryPresenter(
                     }
                 }
 
-                override fun onFail(message: String) {
+                override fun onFail(message: Exception?) {
                     view?.showError(message)
                     view?.showLoading(false)
                 }
@@ -63,7 +64,7 @@ class DetailCategoryPresenter(
                     view?.showLoading(false)
                 }
 
-                override fun onFail(message: String) {
+                override fun onFail(message: Exception?) {
                     view?.showError(message)
                     view?.showLoading(false)
                 }

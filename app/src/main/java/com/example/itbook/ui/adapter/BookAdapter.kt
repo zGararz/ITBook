@@ -18,7 +18,8 @@ class BookAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(
         LayoutInflater.from(parent.context).inflate(R.layout.item_book, parent, false),
-         currentCategory, itemClickListener)
+        currentCategory, itemClickListener
+    )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bindData(books[position])
@@ -30,6 +31,7 @@ class BookAdapter(
         this.books.run {
             clear()
             addAll(books)
+            notifyDataSetChanged()
         }
     }
 

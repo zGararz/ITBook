@@ -69,6 +69,7 @@ class Book(
     }
 
     companion object {
+        const val CATEGORY = "category"
         const val BOOKS = "books"
         const val TITLE = "title"
         const val SUBTITLE = "subtitle"
@@ -83,5 +84,11 @@ class Book(
         const val YEAR = "year"
         const val RATING = "rating"
         const val DESC = "desc"
+        const val RATING_0 = 0
+        const val RATING_1 = 1
+        const val RATING_2 = 2
+        const val RATING_3 = 3
+        const val RATING_4 = 4
+        const val RATING_5 = 5
     }
 }
