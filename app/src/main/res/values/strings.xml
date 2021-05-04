@@ -40,6 +40,7 @@
     <string name="category_android">Android</string>
     <string name="category_ios">IOS</string>
     <string name="category_linux">Linux</string>
+    <string name="error_internet_not_connection">Check your internet connection!</string>
 
     <string-array name="categories">
         <item>@string/category_programing</item>

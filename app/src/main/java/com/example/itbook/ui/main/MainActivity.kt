@@ -6,8 +6,8 @@ import androidx.fragment.app.Fragment
 import com.example.itbook.R
 import com.example.itbook.base.BaseActivity
 import com.example.itbook.ui.favorite.FavoriteFragment
-import com.example.itbook.ui.settings.SettingsFragment
 import com.example.itbook.ui.home.HomeFragment
+import com.example.itbook.ui.settings.SettingsFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 

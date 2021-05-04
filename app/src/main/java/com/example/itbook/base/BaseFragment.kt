@@ -9,6 +9,7 @@ import com.example.itbook.R
 
 abstract class BaseFragment : Fragment() {
     protected abstract val layoutResource: Int
+    protected var isSetup: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -19,7 +20,10 @@ abstract class BaseFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
-        initData()
+        if (!isSetup) {
+            initData()
+            isSetup = true
+        }
         initListeners()
     }
 

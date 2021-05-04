@@ -3,18 +3,18 @@ package com.example.itbook.utils
 import android.os.AsyncTask
 
 @Suppress("DEPRECATION")
-class LoadDataAsynTask<T>(
+class LoadDataAsyncTask<T>(
     private val callBack: OnDataLoadCallBack<T>,
     private val handler: () -> T?
 ) : AsyncTask<Unit, Unit, T?>() {
 
-    private var error = ""
+    private var error: Exception? = null
 
     override fun doInBackground(vararg params: Unit?): T? {
         return try {
             handler()
         } catch (e: Exception) {
-            error = e.toString()
+            error = e
             null
         }
     }
