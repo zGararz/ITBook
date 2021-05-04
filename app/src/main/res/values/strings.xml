@@ -8,6 +8,20 @@
     <string name="category_name">Category</string>
     <string name="title_book">Title</string>
     <string name="subtitle_book">Subtitle</string>
+    <string name="subtitle_authors">Authors</string>
+    <string name="content_description_book">content of description</string>
+    <string name="content_link_book">https://itbook.store</string>
+    <string name="information_book">Information</string>
+    <string name="description_book">Description</string>
+    <string name="link_book">Link to by this book</string>
+    <string name="similar_book">Similar Book</string>
+    <string name="rating_book">rating</string>
+    <string name="publisher_book">publisher</string>
+    <string name="language_book">language</string>
+    <string name="pages_book">papers</string>
+    <string name="year_book">year</string>
+    <string name="isbn10_book">isbn10</string>
+    <string name="isbn13_book">isbn13</string>
 
     <string name="category_new">New</string>
     <string name="category_basic">Basic</string>
