@@ -7,6 +7,6 @@
     android:background="@drawable/square_radius_2"
     android:paddingHorizontal="@dimen/dp_10"
     android:paddingVertical="@dimen/dp_5"
-    android:text="@string/category_name"
+    android:text="@string/title_category_name"
     android:textAlignment="center"
     android:textSize="@dimen/sp_15" />

@@ -12,7 +12,7 @@
         android:id="@+id/textPreviewCategory"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/category_name"
+        android:text="@string/title_category_name"
         android:textColor="@color/color_mine_shaft"
         android:textSize="@dimen/sp_20"
         android:textStyle="bold"

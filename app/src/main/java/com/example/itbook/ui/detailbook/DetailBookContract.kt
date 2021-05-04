@@ -15,7 +15,7 @@ class DetailBookContract {
         fun getRemoteBook(id: String)
         fun getLocalBook(id: String)
         fun getSimilarBooks(title: String)
-        fun getFavorite(isbn13: String)
+        fun getFavorite(id: String)
         fun setFavorite(isFavorite: Boolean)
     }
 }

@@ -76,8 +76,8 @@ class DetailBookPresenter(
             })
     }
 
-    override fun getFavorite(isbn13: String) {
-        repository.getBook(isbn13, object : OnDataLoadCallBack<Book> {
+    override fun getFavorite(id: String) {
+        repository.getBook(id, object : OnDataLoadCallBack<Book> {
             override fun onSuccess(data: Book) {
                 view.showFavorite(true)
             }
