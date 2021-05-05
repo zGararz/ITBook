@@ -8,14 +8,14 @@
     <string name="title_subtitle_book">Subtitle</string>
     <string name="title_subtitle_authors">Authors</string>
     <string name="title_similar_book">Similar Book</string>
+    <string name="title_information_book">Information</string>
+    <string name="title_description_book">Description</string>
+    <string name="title_link_book">Link to by this book</string>
 
     <string name="text_title_welcome">Are you ready to read?</string>
     <string name="text_content_welcome">"Let's choose a book which you like."</string>
     <string name="text_content_description_book">content of description</string>
     <string name="text_content_link_book">https://itbook.store</string>
-    <string name="text_information_book">Information</string>
-    <string name="text_description_book">Description</string>
-    <string name="text_link_book">Link to by this book</string>
     <string name="text_rating_book">rating</string>
     <string name="text_publisher_book">publisher</string>
     <string name="text_language_book">language</string>
@@ -25,6 +25,7 @@
     <string name="text_isbn13_book">isbn13</string>
     <string name="text_favorite_books">Your Favorite Books</string>
     <string name="text_default_books_count">book.</string>
+    <string name="text_search_result">search result</string>
 
     <string name="error_internet_not_connection">Check your internet connection!</string>
 
