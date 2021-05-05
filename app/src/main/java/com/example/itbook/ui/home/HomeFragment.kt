@@ -17,6 +17,7 @@ import com.example.itbook.ui.adapter.PreviewCategoryAdapter
 import com.example.itbook.ui.detailbook.DetailBookFragment
 import com.example.itbook.ui.detailcategory.DetailCategoryFragment
 import com.example.itbook.ui.dialog.LoadingDialogFragment
+import com.example.itbook.utils.showError
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.preview_category.*
 import org.json.JSONException
@@ -77,7 +78,7 @@ class HomeFragment : BaseFragment(), HomeContract.View {
             is JSONException -> errorMessage = resources.getString(R.string.error_internet_not_connection)
         }
         isSetup = false
-        Toast.makeText(activity, errorMessage, Toast.LENGTH_LONG).show()
+        activity?.showError(errorMessage)
     }
 
     override fun showLoading(isShow: Boolean) {
