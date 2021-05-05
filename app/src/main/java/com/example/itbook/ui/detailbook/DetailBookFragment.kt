@@ -14,6 +14,7 @@ import com.example.itbook.data.source.remote.BookRemoteHandler
 import com.example.itbook.data.source.remote.BooksRemoteDataSource
 import com.example.itbook.ui.adapter.BookAdapter
 import com.example.itbook.ui.dialog.LoadingDialogFragment
+import com.example.itbook.ui.search.SearchFragment
 import com.example.itbook.utils.LinkBuilder
 import com.example.itbook.utils.loadImageFromUri
 import com.example.itbook.utils.showError
@@ -62,6 +63,7 @@ class DetailBookFragment : BaseFragment(), DetailBookContract.View {
     }
 
     override fun initListeners() {
+        imageSearchDetailBook.setOnClickListener { addFragment(SearchFragment()) }
         imageFavoriteDetailBook.setOnClickListener { onFavoriteClickListener() }
         imageBackDetailBook.setOnClickListener { onBackClickListener() }
         imageShareDetailBook.setOnClickListener { onShareClickListener() }
