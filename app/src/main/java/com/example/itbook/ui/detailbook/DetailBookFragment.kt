@@ -32,7 +32,7 @@ class DetailBookFragment : BaseFragment(), DetailBookContract.View {
     private var isLocalBook = false
 
     override fun initViews() {
-        val titleSimilarBook = resources.getString(R.string.similar_book)
+        val titleSimilarBook = resources.getString(R.string.title_similar_book)
         layoutPreviewCategory.apply {
             recyclerViewBooks.adapter = bookAdapter
             textPreviewCategory.text = titleSimilarBook

@@ -17,16 +17,16 @@ class BooksRepository private constructor(
         local.insertBook(book, callback)
     }
 
-    override fun getBook(isbn13: String, callback: OnDataLoadCallBack<Book>) {
-        local.getBook(isbn13, callback)
+    override fun getBook(id: String, callback: OnDataLoadCallBack<Book>) {
+        local.getBook(id, callback)
     }
 
     override fun getAllBooks(callback: OnDataLoadCallBack<List<Book>>) {
         local.getAllBooks(callback)
     }
 
-    override fun deleteBook(isbn13: String, callback: OnDataLoadCallBack<Int>) {
-        local.deleteBook(isbn13, callback)
+    override fun deleteBook(id: String, callback: OnDataLoadCallBack<Int>) {
+        local.deleteBook(id, callback)
     }
 
     companion object {

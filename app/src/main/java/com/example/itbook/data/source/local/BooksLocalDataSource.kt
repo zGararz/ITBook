@@ -17,9 +17,9 @@ class BooksLocalDataSource private constructor(
         }.execute()
     }
 
-    override fun getBook(isbn13: String, callback: OnDataLoadCallBack<Book>) {
+    override fun getBook(id: String, callback: OnDataLoadCallBack<Book>) {
         LoadDataAsyncTask(callback) {
-            bookDao.getBook(isbn13)
+            bookDao.getBook(id)
         }.execute()
     }
 
@@ -29,9 +29,9 @@ class BooksLocalDataSource private constructor(
         }.execute()
     }
 
-    override fun deleteBook(isbn13: String, callback: OnDataLoadCallBack<Int>) {
+    override fun deleteBook(id: String, callback: OnDataLoadCallBack<Int>) {
         LoadDataAsyncTask(callback) {
-            bookDao.deleteBook(isbn13)
+            bookDao.deleteBook(id)
         }.execute()
     }
 

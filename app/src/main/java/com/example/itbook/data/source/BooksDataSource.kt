@@ -10,8 +10,8 @@ interface BooksDataSource {
 
     interface Local {
         fun insertBook(book: Book, callback: OnDataLoadCallBack<Long>)
-        fun getBook(isbn13: String, callback: OnDataLoadCallBack<Book>)
+        fun getBook(id: String, callback: OnDataLoadCallBack<Book>)
         fun getAllBooks(callback: OnDataLoadCallBack<List<Book>>)
-        fun deleteBook(isbn13: String, callback: OnDataLoadCallBack<Int>)
+        fun deleteBook(id: String, callback: OnDataLoadCallBack<Int>)
     }
 }
