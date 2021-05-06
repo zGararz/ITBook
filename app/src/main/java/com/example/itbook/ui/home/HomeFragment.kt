@@ -17,6 +17,7 @@ import com.example.itbook.ui.adapter.PreviewCategoryAdapter
 import com.example.itbook.ui.detailbook.DetailBookFragment
 import com.example.itbook.ui.detailcategory.DetailCategoryFragment
 import com.example.itbook.ui.dialog.LoadingDialogFragment
+import com.example.itbook.ui.search.SearchFragment
 import com.example.itbook.utils.showError
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.preview_category.*
@@ -61,6 +62,7 @@ class HomeFragment : BaseFragment(), HomeContract.View {
     }
 
     override fun initListeners() {
+        textSearch.setOnClickListener { addFragment(SearchFragment()) }
     }
 
     override fun showCategories(categories: List<String>) {

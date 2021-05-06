@@ -14,7 +14,7 @@ class DetailCategoryPresenter(
 
     private val books = mutableListOf<Book>()
     private var currentPage = 1
-    private var stop = false
+    private var isStop = false
 
     override fun start() {
         val newBook = "New"
@@ -27,7 +27,7 @@ class DetailCategoryPresenter(
     }
 
     override fun stop() {
-        stop = true
+        isStop = true
     }
 
     override fun getBooks(category: String) {
@@ -40,7 +40,7 @@ class DetailCategoryPresenter(
                     view?.showBooks(books)
                     view?.showLoading(false)
 
-                    if (view != null && !data.isEmpty() && !stop) {
+                    if (view != null && !data.isEmpty() && !isStop) {
                         currentPage++
                         repository.getRemoteBooks(APIQuery.queryBooks(category, currentPage), this)
                     }

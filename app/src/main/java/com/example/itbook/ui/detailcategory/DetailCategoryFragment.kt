@@ -14,6 +14,7 @@ import com.example.itbook.data.source.remote.BooksRemoteDataSource
 import com.example.itbook.ui.adapter.PreviewBookAdapter
 import com.example.itbook.ui.detailbook.DetailBookFragment
 import com.example.itbook.ui.dialog.LoadingDialogFragment
+import com.example.itbook.ui.search.SearchFragment
 import com.example.itbook.utils.showError
 import kotlinx.android.synthetic.main.fragment_detail_category.*
 import org.json.JSONException
@@ -53,16 +54,14 @@ class DetailCategoryFragment() : BaseFragment(),
 
     override fun initListeners() {
         imageBackDetailCategory.setOnClickListener { onBackClickListener() }
+        imageSearch.setOnClickListener { addFragment(SearchFragment()) }
     }
 
     override fun showBooks(books: List<Book>) {
         val booksSize = this.books.size - 1
         val insertCount = books.size - this.books.size
 
-        previewBookAdapter.apply {
-            updateData(books.toMutableList())
-            notifyItemRangeInserted(booksSize, insertCount)
-        }
+        previewBookAdapter.updateData(books.toMutableList(), booksSize, insertCount)
         this.books = books.toMutableList()
     }
 

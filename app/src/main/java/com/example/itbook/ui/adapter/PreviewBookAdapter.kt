@@ -34,6 +34,15 @@ class PreviewBookAdapter(
         this.books.run {
             clear()
             addAll(books)
+            notifyDataSetChanged()
+        }
+    }
+
+    fun updateData(books: MutableList<Book>, start: Int, count: Int) {
+        this.books.run {
+            clear()
+            addAll(books)
+            notifyItemRangeInserted(start, count)
         }
     }
 
