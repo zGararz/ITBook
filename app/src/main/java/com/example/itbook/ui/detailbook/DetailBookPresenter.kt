@@ -2,7 +2,6 @@ package com.example.itbook.ui.detailbook
 
 import com.example.itbook.data.model.Book
 import com.example.itbook.data.repository.BooksRepository
-import com.example.itbook.data.source.remote.API.APIQuery
 import com.example.itbook.utils.OnDataLoadCallBack
 
 class DetailBookPresenter(
@@ -23,57 +22,54 @@ class DetailBookPresenter(
     }
 
     override fun getRemoteBook(id: String) {
-        view.showLoading(true)
-        repository.getRemoteBooks(
-            APIQuery.queryBook(id),
-            object : OnDataLoadCallBack<List<Book>> {
-                override fun onSuccess(data: List<Book>) {
-                    view.showBook(data[0])
-                    view.showLoading(false)
-                    book = data[0]
+        view.showLoading()
+        repository.getRemoteBooks(id, object : OnDataLoadCallBack<List<Book>> {
+            override fun onSuccess(data: List<Book>) {
+                view.showBook(data[0])
+                view.hideLoading()
+                book = data[0]
 
-                    book?.title?.let { getSimilarBooks(it) }
-                }
+                book?.title?.let { getSimilarBooks(it) }
+            }
 
-                override fun onFail(message: Exception?) {
-                    view.showError(message)
-                    view.showLoading(false)
-                }
-            })
+            override fun onFail(message: Exception?) {
+                view.showError(message)
+                view.hideLoading()
+            }
+        })
     }
 
     override fun getLocalBook(id: String) {
-        view.showLoading(true)
+        view.showLoading()
         repository.getBook(id, object : OnDataLoadCallBack<Book> {
             override fun onSuccess(data: Book) {
                 view.showBook(data)
-                view.showLoading(false)
+                view.hideLoading()
                 book = data
             }
 
             override fun onFail(message: Exception?) {
                 view.showError(message)
-                view.showLoading(false)
+                view.hideLoading()
             }
         })
     }
 
     override fun getSimilarBooks(title: String) {
-        repository.getRemoteBooks(
-            APIQuery.queryBooks(title), object : OnDataLoadCallBack<List<Book>> {
-                override fun onSuccess(data: List<Book>) {
-                    if (data.isNotEmpty()) {
-                        val books = data.toMutableList()
-                        books.removeAt(0)
-                        books.shuffle()
-                        view.showSimilarBooks(books)
-                    }
+        repository.getRemoteBooks(title, object : OnDataLoadCallBack<List<Book>> {
+            override fun onSuccess(data: List<Book>) {
+                if (data.isNotEmpty()) {
+                    val books = data.toMutableList()
+                    books.removeAt(0)
+                    books.shuffle()
+                    view.showSimilarBooks(books)
                 }
+            }
 
-                override fun onFail(message: Exception?) {
-                    view.showError(message)
-                }
-            })
+            override fun onFail(message: Exception?) {
+                view.showError(message)
+            }
+        })
     }
 
     override fun getFavorite(id: String) {

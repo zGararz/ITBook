@@ -2,7 +2,6 @@ package com.example.itbook.ui.search
 
 import android.widget.EditText
 import android.widget.TextView
-import androidx.core.os.bundleOf
 import com.example.itbook.R
 import com.example.itbook.base.BaseFragment
 import com.example.itbook.data.model.Book
@@ -14,11 +13,11 @@ import com.example.itbook.data.source.remote.BookRemoteHandler
 import com.example.itbook.data.source.remote.BooksRemoteDataSource
 import com.example.itbook.ui.adapter.PreviewBookAdapter
 import com.example.itbook.ui.detailbook.DetailBookFragment
-import com.example.itbook.ui.dialog.LoadingDialogFragment
 import com.example.itbook.utils.closeKeyboard
 import com.example.itbook.utils.openKeyboard
 import com.example.itbook.utils.showError
 import kotlinx.android.synthetic.main.fragment_search.*
+import org.json.JSONException
 
 class SearchFragment : BaseFragment(), SearchContract.View {
     override val layoutResource: Int = R.layout.fragment_search
@@ -26,7 +25,6 @@ class SearchFragment : BaseFragment(), SearchContract.View {
     private var presenter: SearchPresenter? = null
     private var booksRepository: BooksRepository? = null
     private val previewBookAdapter: PreviewBookAdapter = PreviewBookAdapter(this::onBookClick)
-    private var loadingDialogFragment: LoadingDialogFragment? = null
     private var books = mutableListOf<Book>()
     private var isFirstSearch = true
 
@@ -34,8 +32,6 @@ class SearchFragment : BaseFragment(), SearchContract.View {
         editSearch.requestFocus()
         activity?.let { editSearch.openKeyboard(it) }
         recyclerSearchBooks.adapter = previewBookAdapter
-        loadingDialogFragment = LoadingDialogFragment()
-        loadingDialogFragment?.isCancelable = false
         isSetup = false
     }
 
@@ -83,15 +79,10 @@ class SearchFragment : BaseFragment(), SearchContract.View {
     }
 
     override fun showError(error: Exception?) {
-        activity?.showError(resources.getString(R.string.error_search))
-    }
-
-    override fun showLoading(isShow: Boolean) {
-        loadingDialogFragment?.let {
-            if (isShow) {
-                activity?.let { activity -> it.show(activity.supportFragmentManager, "") }
-            } else {
-                it.dismiss()
+        error?.let {
+            when (it) {
+                is JSONException -> activity?.showError(resources.getString(R.string.error_search))
+                else -> activity?.showError(error.toString())
             }
         }
     }
@@ -118,12 +109,7 @@ class SearchFragment : BaseFragment(), SearchContract.View {
     }
 
     private fun onBookClick(position: Int) {
-        val fragment = DetailBookFragment().apply {
-            arguments = bundleOf(
-                Book.ISBN13 to books[position].isbn13
-            )
-        }
-        addFragment(fragment)
+        addFragment(DetailBookFragment.getInstance(books[position].isbn13, false))
     }
 
     private fun onCancelClickListener() = activity?.supportFragmentManager?.popBackStack()

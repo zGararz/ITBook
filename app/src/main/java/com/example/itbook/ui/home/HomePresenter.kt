@@ -3,7 +3,6 @@ package com.example.itbook.ui.home
 import com.example.itbook.data.model.Book
 import com.example.itbook.data.model.PreviewCategory
 import com.example.itbook.data.repository.BooksRepository
-import com.example.itbook.data.source.remote.API.APIQuery
 import com.example.itbook.utils.OnDataLoadCallBack
 
 class HomePresenter(
@@ -23,21 +22,21 @@ class HomePresenter(
     }
 
     private fun getNewBooks() {
-        view.showLoading(true)
-        repository.getRemoteBooks(APIQuery.queryNews(), object : OnDataLoadCallBack<List<Book>> {
+        view.showLoading()
+        repository.getNewsBook(object : OnDataLoadCallBack<List<Book>> {
             override fun onSuccess(data: List<Book>) {
                 val books = data.toMutableList()
 
                 books.shuffle()
                 previewCategories.add(PreviewCategory(categories[categories.size - 1], books))
                 view.showPreviewCategories(previewCategories)
-                view.showLoading(false)
+                view.hideLoading()
             }
 
             override fun onFail(message: Exception?) {
                 error = message
                 view.showError(error)
-                view.showLoading(false)
+                view.hideLoading()
             }
         })
     }
@@ -51,7 +50,7 @@ class HomePresenter(
 
             val previewCategory = PreviewCategory(categories[categoryPosition], mutableListOf())
             repository.getRemoteBooks(
-                APIQuery.queryBooks(categories[categoryPosition]),
+                categories[categoryPosition],
                 object : OnDataLoadCallBack<List<Book>> {
 
                     override fun onSuccess(data: List<Book>) {
@@ -68,7 +67,7 @@ class HomePresenter(
                     override fun onFail(message: Exception?) {
                         if (message.toString() != error.toString()) {
                             error = message
-                            view.showError(error)
+                            view.hideLoading()
                         }
                     }
                 }

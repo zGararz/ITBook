@@ -14,7 +14,6 @@ import com.example.itbook.data.source.remote.BookRemoteHandler
 import com.example.itbook.data.source.remote.BooksRemoteDataSource
 import com.example.itbook.ui.adapter.PreviewBookAdapter
 import com.example.itbook.ui.detailbook.DetailBookFragment
-import com.example.itbook.ui.dialog.LoadingDialogFragment
 import com.example.itbook.utils.closeKeyboard
 import com.example.itbook.utils.showError
 import kotlinx.android.synthetic.main.fragment_favorite.*
@@ -24,7 +23,6 @@ class FavoriteBooksFragment : BaseFragment(), FavoriteBooksContract.View {
 
     private var presenter: FavoriteBooksPresenter? = null
     private val previewBookAdapter = PreviewBookAdapter(this::onBookClick)
-    private var loadingDialogFragment: LoadingDialogFragment? = null
     private var books = mutableListOf<Book>()
 
     private val textWatcher = object : TextWatcher {
@@ -51,8 +49,6 @@ class FavoriteBooksFragment : BaseFragment(), FavoriteBooksContract.View {
 
     override fun initViews() {
         recyclerFavoriteBooks.adapter = previewBookAdapter
-        loadingDialogFragment = LoadingDialogFragment()
-        loadingDialogFragment?.isCancelable = false
         isSetup = false
     }
 
@@ -88,17 +84,7 @@ class FavoriteBooksFragment : BaseFragment(), FavoriteBooksContract.View {
     }
 
     override fun showError(error: Exception?) {
-        activity?.showError(error.toString())
-    }
-
-    override fun showLoading(isShow: Boolean) {
-        loadingDialogFragment?.let {
-            if (isShow) {
-                activity?.let { activity -> it.show(activity.supportFragmentManager, "") }
-            } else {
-                it.dismiss()
-            }
-        }
+        error?.let { activity?.showError(it.toString()) }
     }
 
     private fun onBookClick(position: Int) {

@@ -13,7 +13,6 @@ import com.example.itbook.ui.adapter.CategoryAdapter
 import com.example.itbook.ui.adapter.PreviewCategoryAdapter
 import com.example.itbook.ui.detailbook.DetailBookFragment
 import com.example.itbook.ui.detailcategory.DetailCategoryFragment
-import com.example.itbook.ui.dialog.LoadingDialogFragment
 import com.example.itbook.ui.search.SearchFragment
 import com.example.itbook.utils.showError
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -28,14 +27,10 @@ class HomeFragment : BaseFragment(), HomeContract.View {
     private val categoryAdapter = CategoryAdapter(this::onItemCategoryClick)
     private val previewCategoryAdapter =
         PreviewCategoryAdapter(this::onItemPreviewCategoryClick, this::onItemBookClick)
-    private var loadingDialogFragment: LoadingDialogFragment? = null
 
     override fun initViews() {
         recyclerViewCategory.adapter = categoryAdapter
         recyclerViewPreviewCategory.adapter = previewCategoryAdapter
-
-        loadingDialogFragment = LoadingDialogFragment()
-        loadingDialogFragment?.isCancelable = false
     }
 
     override fun initData() {
@@ -71,21 +66,10 @@ class HomeFragment : BaseFragment(), HomeContract.View {
     }
 
     override fun showError(error: Exception?) {
-        var errorMessage = ""
-        when (error) {
-            is JSONException -> errorMessage =
-                resources.getString(R.string.error_internet_not_connection)
-        }
-        isSetup = false
-        activity?.showError(errorMessage)
-    }
-
-    override fun showLoading(isShow: Boolean) {
-        loadingDialogFragment?.let {
-            if (isShow) {
-                activity?.let { it1 -> it.show(it1.supportFragmentManager, "") }
-            } else {
-                it.dismiss()
+        error?.let {
+            when (it) {
+                is JSONException -> activity?.showError(resources.getString(R.string.error_load_data))
+                else -> activity?.showError(error.toString())
             }
         }
     }

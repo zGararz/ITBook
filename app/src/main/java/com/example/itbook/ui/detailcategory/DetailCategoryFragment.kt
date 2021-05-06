@@ -1,5 +1,7 @@
 package com.example.itbook.ui.detailcategory
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.core.os.bundleOf
 import com.example.itbook.R
 import com.example.itbook.base.BaseFragment
@@ -12,7 +14,6 @@ import com.example.itbook.data.source.remote.BookRemoteHandler
 import com.example.itbook.data.source.remote.BooksRemoteDataSource
 import com.example.itbook.ui.adapter.PreviewBookAdapter
 import com.example.itbook.ui.detailbook.DetailBookFragment
-import com.example.itbook.ui.dialog.LoadingDialogFragment
 import com.example.itbook.ui.search.SearchFragment
 import com.example.itbook.utils.showError
 import kotlinx.android.synthetic.main.fragment_detail_category.*
@@ -25,30 +26,34 @@ class DetailCategoryFragment() : BaseFragment(),
     private var category: String? = null
     private var presenter: DetailCategoryPresenter? = null
     private val previewBookAdapter = PreviewBookAdapter(this::onBookClick)
-    private var loadingDialogFragment: LoadingDialogFragment? = null
     private var books = mutableListOf<Book>()
 
 
     override fun initViews() {
         recyclerPreviewCategory.adapter = previewBookAdapter
-        loadingDialogFragment = LoadingDialogFragment()
-        loadingDialogFragment?.isCancelable = false
+        textTitleDetailCategory.text = category
     }
 
+    @RequiresApi(Build.VERSION_CODES.R)
     override fun initData() {
         arguments?.let {
             category = it.getString(BUNDLE_BOOK_CATEGORY)
-            textTitleDetailCategory.text = category
         }
-        activity?.let {
-            val booksRepository = BooksRepository.getInstance(
+
+        val booksRepository = activity?.let {
+            BooksRepository.getInstance(
                 BooksRemoteDataSource.getInstance(BookRemoteHandler()),
                 BooksLocalDataSource.getInstance(BookDaoImp(BooksDatabase.getInstance(it)))
             )
-
-            category?.let { presenter = DetailCategoryPresenter(this, booksRepository, it) }
-            presenter?.start()
         }
+
+        category?.let {
+            presenter = booksRepository?.let { repository ->
+                DetailCategoryPresenter(this, repository, it)
+            }
+        }
+        presenter?.start()
+
     }
 
     override fun initListeners() {
@@ -65,30 +70,16 @@ class DetailCategoryFragment() : BaseFragment(),
     }
 
     override fun showError(error: Exception?) {
-        var errorMessage = ""
-        when (error) {
-            is JSONException -> errorMessage = resources.getString(R.string.error_internet_not_connection)
-        }
-        activity?.showError(errorMessage)
-    }
-
-    override fun showLoading(isShow: Boolean) {
-        loadingDialogFragment?.let {
-            if (isShow) {
-                activity?.let { it1 -> it.show(it1.supportFragmentManager, "") }
-            } else {
-                it.dismiss()
+        error?.let {
+            when (it) {
+                is JSONException -> activity?.showError(resources.getString(R.string.error_load_data))
+                else -> activity?.showError(error.toString())
             }
         }
     }
 
     private fun onBookClick(position: Int) {
-        val fragment = DetailBookFragment()
-
-        fragment.arguments = bundleOf(
-            Book.ISBN13 to books[position].isbn13
-        )
-        addFragment(fragment)
+        addFragment(DetailBookFragment.getInstance(books[position].isbn13, false))
     }
 
     private fun onBackClickListener() {
