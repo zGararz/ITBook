@@ -3,8 +3,6 @@ package com.example.itbook.ui.favorite
 import android.annotation.SuppressLint
 import android.text.Editable
 import android.text.TextWatcher
-import android.widget.Toast
-import androidx.core.os.bundleOf
 import com.example.itbook.R
 import com.example.itbook.base.BaseFragment
 import com.example.itbook.data.model.Book
@@ -16,7 +14,6 @@ import com.example.itbook.data.source.remote.BookRemoteHandler
 import com.example.itbook.data.source.remote.BooksRemoteDataSource
 import com.example.itbook.ui.adapter.PreviewBookAdapter
 import com.example.itbook.ui.detailbook.DetailBookFragment
-import com.example.itbook.ui.detailbook.DetailBookFragment.Companion.STRING_LOCAL
 import com.example.itbook.ui.dialog.LoadingDialogFragment
 import com.example.itbook.utils.closeKeyboard
 import com.example.itbook.utils.showError
@@ -105,11 +102,7 @@ class FavoriteBooksFragment : BaseFragment(), FavoriteBooksContract.View {
     }
 
     private fun onBookClick(position: Int) {
-        val fragment = DetailBookFragment().apply {
-            arguments = bundleOf(Book.ISBN13 to books[position].isbn13, STRING_LOCAL to true)
-        }
-
-        addFragment(fragment)
+        addFragment(DetailBookFragment.getInstance(books[position].isbn13, true))
     }
 
     @SuppressLint("DefaultLocale")

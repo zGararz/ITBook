@@ -1,6 +1,5 @@
 package com.example.itbook.ui.detailcategory
 
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import com.example.itbook.R
 import com.example.itbook.base.BaseFragment
@@ -38,7 +37,7 @@ class DetailCategoryFragment() : BaseFragment(),
 
     override fun initData() {
         arguments?.let {
-            category = it.getString(Book.CATEGORY)
+            category = it.getString(BUNDLE_BOOK_CATEGORY)
             textTitleDetailCategory.text = category
         }
         activity?.let {
@@ -99,5 +98,13 @@ class DetailCategoryFragment() : BaseFragment(),
     override fun onStop() {
         super.onStop()
         presenter?.stop()
+    }
+
+    companion object {
+        private const val BUNDLE_BOOK_CATEGORY = "BUNDLE_BOOK_CATEGORY"
+
+        fun getInstance(category: String) = DetailCategoryFragment().apply {
+            arguments = bundleOf(BUNDLE_BOOK_CATEGORY to category)
+        }
     }
 }
