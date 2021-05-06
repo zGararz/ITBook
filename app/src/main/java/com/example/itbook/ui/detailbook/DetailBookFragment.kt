@@ -1,7 +1,6 @@
 package com.example.itbook.ui.detailbook
 
 import android.content.Intent
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import com.example.itbook.R
 import com.example.itbook.base.BaseFragment
@@ -15,6 +14,7 @@ import com.example.itbook.data.source.remote.BooksRemoteDataSource
 import com.example.itbook.ui.adapter.BookAdapter
 import com.example.itbook.ui.dialog.LoadingDialogFragment
 import com.example.itbook.ui.search.SearchFragment
+import com.example.itbook.ui.similar.SimilarBooksFragment
 import com.example.itbook.utils.LinkBuilder
 import com.example.itbook.utils.loadImageFromUri
 import com.example.itbook.utils.showError
@@ -47,8 +47,8 @@ class DetailBookFragment : BaseFragment(), DetailBookContract.View {
     override fun initData() {
         var isbn13: String? = null
         arguments?.let {
-            isLocalBook = it.getBoolean(STRING_LOCAL, false)
-            isbn13 = it.getString(Book.ISBN13)
+            isLocalBook = it.getBoolean(BUNDLE_BOOK_LOCAL, false)
+            isbn13 = it.getString(BUNDLE_BOOK_ID)
         }
         activity?.let {
             val bookRepository = BooksRepository.getInstance(
@@ -159,9 +159,18 @@ class DetailBookFragment : BaseFragment(), DetailBookContract.View {
         }
     }
 
-    private fun onSimilarBooksClickListener() {}
+    private fun onSimilarBooksClickListener() {
+        book?.let {
+            addFragment(SimilarBooksFragment.getInstance(it.title))
+        }
+    }
 
     companion object {
-        const val STRING_LOCAL = "local"
+        private const val BUNDLE_BOOK_LOCAL = "BUNDLE_BOOK_LOCAL"
+        private const val BUNDLE_BOOK_ID = "BUNDLE_BOOK_ID"
+
+        fun getInstance(id: String, isLocal: Boolean) = DetailBookFragment().apply {
+            arguments = bundleOf(BUNDLE_BOOK_ID to id, BUNDLE_BOOK_LOCAL to isLocal)
+        }
     }
 }

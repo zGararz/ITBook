@@ -1,10 +1,7 @@
 package com.example.itbook.ui.home
 
-import android.widget.Toast
-import androidx.core.os.bundleOf
 import com.example.itbook.R
 import com.example.itbook.base.BaseFragment
-import com.example.itbook.data.model.Book
 import com.example.itbook.data.model.PreviewCategory
 import com.example.itbook.data.repository.BooksRepository
 import com.example.itbook.data.source.local.BooksLocalDataSource
@@ -20,7 +17,6 @@ import com.example.itbook.ui.dialog.LoadingDialogFragment
 import com.example.itbook.ui.search.SearchFragment
 import com.example.itbook.utils.showError
 import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.preview_category.*
 import org.json.JSONException
 
 class HomeFragment : BaseFragment(), HomeContract.View {
@@ -77,7 +73,8 @@ class HomeFragment : BaseFragment(), HomeContract.View {
     override fun showError(error: Exception?) {
         var errorMessage = ""
         when (error) {
-            is JSONException -> errorMessage = resources.getString(R.string.error_internet_not_connection)
+            is JSONException -> errorMessage =
+                resources.getString(R.string.error_internet_not_connection)
         }
         isSetup = false
         activity?.showError(errorMessage)
@@ -94,26 +91,19 @@ class HomeFragment : BaseFragment(), HomeContract.View {
     }
 
     private fun onItemCategoryClick(position: Int) {
-        categories?.let {
-            val fragment = DetailCategoryFragment()
-            fragment.arguments = bundleOf(Book.CATEGORY to it[position])
-            addFragment(fragment)
-        }
+        categories?.let { addFragment(DetailCategoryFragment.getInstance(it[position])) }
     }
 
     private fun onItemPreviewCategoryClick(position: Int) {
-        val fragment = DetailCategoryFragment()
-        fragment.arguments = bundleOf(
-            Book.CATEGORY to previewCategories[position].name
-        )
-        addFragment(fragment)
+        addFragment(DetailCategoryFragment.getInstance(previewCategories[position].name))
     }
 
     private fun onItemBookClick(currentCategory: Int, position: Int) {
-        val fragment = DetailBookFragment()
-        fragment.arguments = bundleOf(
-            Book.ISBN13 to previewCategories[currentCategory].books[position].isbn13
+        addFragment(
+            DetailBookFragment.getInstance(
+                previewCategories[currentCategory].books[position].isbn13,
+                false
+            )
         )
-        addFragment(fragment)
     }
 }
