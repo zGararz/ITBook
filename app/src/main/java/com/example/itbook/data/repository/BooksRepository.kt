@@ -8,9 +8,20 @@ class BooksRepository private constructor(
     private val remote: BooksDataSource.Remote,
     private val local: BooksDataSource.Local
 ) : BooksDataSource.Remote, BooksDataSource.Local {
+    override fun getNewsBook(callback: OnDataLoadCallBack<List<Book>>) {
+        remote.getNewsBook(callback)
+    }
 
     override fun getRemoteBooks(query: String, callback: OnDataLoadCallBack<List<Book>>) {
         remote.getRemoteBooks(query, callback)
+    }
+
+    override fun getRemoteBooks(
+        query: String,
+        page: Int,
+        callback: OnDataLoadCallBack<List<Book>>
+    ) {
+        remote.getRemoteBooks(query, page, callback)
     }
 
     override fun insertBook(book: Book, callback: OnDataLoadCallBack<Long>) {

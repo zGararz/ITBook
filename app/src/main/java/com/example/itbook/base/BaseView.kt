@@ -2,5 +2,6 @@ package com.example.itbook.base
 
 interface BaseView {
     fun showError(error: Exception?)
-    fun showLoading(isShow: Boolean)
+    fun showLoading()
+    fun hideLoading()
 }

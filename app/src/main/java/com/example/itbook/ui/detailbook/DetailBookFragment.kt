@@ -12,7 +12,6 @@ import com.example.itbook.data.source.local.dao.BookDaoImp
 import com.example.itbook.data.source.remote.BookRemoteHandler
 import com.example.itbook.data.source.remote.BooksRemoteDataSource
 import com.example.itbook.ui.adapter.BookAdapter
-import com.example.itbook.ui.dialog.LoadingDialogFragment
 import com.example.itbook.ui.search.SearchFragment
 import com.example.itbook.ui.similar.SimilarBooksFragment
 import com.example.itbook.utils.LinkBuilder
@@ -26,7 +25,6 @@ class DetailBookFragment : BaseFragment(), DetailBookContract.View {
     override val layoutResource: Int = R.layout.fragment_detail_book
 
     private var presenter: DetailBookPresenter? = null
-    private var loadingDialogFragment: LoadingDialogFragment? = null
     private val bookAdapter = BookAdapter(itemClickListener = this::onItemBookClickListener)
     private var books = mutableListOf<Book>()
     private var book: Book? = null
@@ -39,8 +37,6 @@ class DetailBookFragment : BaseFragment(), DetailBookContract.View {
             recyclerViewBooks.adapter = bookAdapter
             textPreviewCategory.text = titleSimilarBook
         }
-        loadingDialogFragment = LoadingDialogFragment()
-        loadingDialogFragment?.isCancelable = false
         isSetup = false
     }
 
@@ -104,20 +100,10 @@ class DetailBookFragment : BaseFragment(), DetailBookContract.View {
     }
 
     override fun showError(error: Exception?) {
-        var errorMessage = "Error"
-        when (error) {
-            is JSONException -> errorMessage =
-                resources.getString(R.string.error_internet_not_connection)
-        }
-        activity?.showError(errorMessage)
-    }
-
-    override fun showLoading(isShow: Boolean) {
-        loadingDialogFragment?.let {
-            if (isShow) {
-                activity?.let { it1 -> it.show(it1.supportFragmentManager, "") }
-            } else {
-                it.dismiss()
+        error?.let {
+            when (it) {
+                is JSONException -> activity?.showError(resources.getString(R.string.error_load_data))
+                else -> activity?.showError(error.toString())
             }
         }
     }
@@ -137,11 +123,7 @@ class DetailBookFragment : BaseFragment(), DetailBookContract.View {
     }
 
     private fun onItemBookClickListener(currentCategory: Int, position: Int) {
-        val fragment = DetailBookFragment()
-        fragment.arguments = bundleOf(
-            Book.ISBN13 to books[position].isbn13
-        )
-        addFragment(fragment)
+        addFragment(getInstance(books[position].isbn13, false))
     }
 
     private fun onBackClickListener() {

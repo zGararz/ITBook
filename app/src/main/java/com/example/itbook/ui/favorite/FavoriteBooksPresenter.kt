@@ -12,16 +12,16 @@ class FavoriteBooksPresenter(
     override fun start() = getFavoriteBooks()
 
     override fun getFavoriteBooks() {
-        view.showLoading(true)
+        view.showLoading()
         repository.getAllBooks(object : OnDataLoadCallBack<List<Book>> {
             override fun onSuccess(data: List<Book>) {
                 view.showFavoriteBooks(data)
-                view.showLoading(false)
+                view.hideLoading()
             }
 
             override fun onFail(message: Exception?) {
                 view.showError(message)
-                view.showLoading(false)
+                view.hideLoading()
             }
         })
     }

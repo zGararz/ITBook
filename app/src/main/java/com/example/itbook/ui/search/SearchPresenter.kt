@@ -17,27 +17,25 @@ class SearchPresenter(
         val books = mutableListOf<Book>()
         var currentPage = 1
 
-        view.showLoading(true)
-        repository.getRemoteBooks(
-            APIQuery.queryBooks(query, currentPage),
-            object : OnDataLoadCallBack<List<Book>> {
+        view.showLoading()
+        repository.getRemoteBooks(query, currentPage, object : OnDataLoadCallBack<List<Book>> {
                 override fun onSuccess(data: List<Book>) {
                     books.addAll(data)
                     view.showSearchResult(books)
-                    view.showLoading(false)
+                    view.hideLoading()
 
                     if (data.isNotEmpty() && !isStop) {
                         currentPage++
                         repository.getRemoteBooks(APIQuery.queryBooks(query, currentPage), this)
                     } else {
-                        if(data.isNotEmpty()) view.resetResult()
+                        if (data.isNotEmpty()) view.resetResult()
                         isStop = false
                     }
                 }
 
                 override fun onFail(message: Exception?) {
                     view.showError(message)
-                    view.showLoading(false)
+                    view.hideLoading()
                 }
             })
     }

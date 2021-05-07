@@ -29,6 +29,7 @@
 
     <string name="error_internet_not_connection">Check your internet connection!</string>
     <string name="error_search">can\'t search</string>
+    <string name="error_load_data">can\'t load books</string>
 
     <string name="category_new">New</string>
     <string name="category_basic">Basic</string>
