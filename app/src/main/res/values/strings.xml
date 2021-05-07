@@ -20,43 +20,43 @@
     <string name="text_title_welcome">Are you ready to read?</string>
     <string name="text_content_welcome">Let\'s choose a book which you like.</string>
     <string name="text_content_description_book">content of description</string>
-    <string name="text_content_link_book">https://itbook.store</string>
+    <string name="text_content_link_book" translatable="false">https://itbook.store</string>
     <string name="text_rating_book">rating</string>
     <string name="text_publisher_book">publisher</string>
     <string name="text_language_book">language</string>
     <string name="text_pages_book">papers</string>
     <string name="text_year_book">year</string>
-    <string name="text_isbn10_book">isbn10</string>
-    <string name="text_isbn13_book">isbn13</string>
+    <string name="text_isbn10_book" translatable="false">isbn10</string>
+    <string name="text_isbn13_book" translatable="false">isbn13</string>
     <string name="text_favorite_books">Your Favorite Books</string>
     <string name="text_default_books_count">book.</string>
     <string name="text_search_result">search result</string>
     <string name="text_language_en" translatable="false">En</string>
     <string name="text_language_vi" translatable="false">Vi</string>
-    <string name="text_dev" >Nguyen Huu Nam</string>
+    <string name="text_dev" translatable="false">Nguyen Huu Nam</string>
     <string name="facebook" translatable="false">https://www.facebook.com/zGararz</string>
 
     <string name="error_internet_not_connection">Check your internet connection!</string>
     <string name="error_search">can\'t search</string>
     <string name="error_load_data">can\'t load books</string>
 
-    <string name="category_new">New</string>
-    <string name="category_basic">Basic</string>
-    <string name="category_.net_framework">.NET Framework</string>
-    <string name="category_design">Design</string>
-    <string name="category_programing">Programing</string>
-    <string name="category_business">Business</string>
-    <string name="category_software">Software</string>
-    <string name="category_sql">SQL</string>
-    <string name="category_microsoft_access">Microsoft Access</string>
-    <string name="category_microsoft_office">Microsoft Office</string>
-    <string name="category_database">Database</string>
-    <string name="category_big_data">Big Data</string>
-    <string name="category_for_dummies">For Dummies</string>
-    <string name="category_html">HTML</string>
-    <string name="category_android">Android</string>
-    <string name="category_ios">IOS</string>
-    <string name="category_linux">Linux</string>
+    <string name="category_new" translatable="false">New</string>
+    <string name="category_basic" translatable="false">Basic</string>
+    <string name="category_.net_framework" translatable="false">.NET Framework</string>
+    <string name="category_design" translatable="false">Design</string>
+    <string name="category_programing" translatable="false">Programing</string>
+    <string name="category_business" translatable="false">Business</string>
+    <string name="category_software" translatable="false">Software</string>
+    <string name="category_sql" translatable="false">SQL</string>
+    <string name="category_microsoft_access" translatable="false">Microsoft Access</string>
+    <string name="category_microsoft_office" translatable="false">Microsoft Office</string>
+    <string name="category_database" translatable="false">Database</string>
+    <string name="category_big_data" translatable="false">Big Data</string>
+    <string name="category_for_dummies" translatable="false">For Dummies</string>
+    <string name="category_html" translatable="false">HTML</string>
+    <string name="category_android" translatable="false">Android</string>
+    <string name="category_ios" translatable="false">IOS</string>
+    <string name="category_linux" translatable="false">Linux</string>
 
     <string-array name="categories">
         <item>@string/category_programing</item>
