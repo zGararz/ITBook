@@ -52,6 +52,10 @@
     <string name="category_android">Android</string>
     <string name="category_ios">IOS</string>
     <string name="category_linux">Linux</string>
+    <string name="text_app_owner">Made by:</string>
+    <string name="text_version">Version:</string>
+    <string name="text_contact">Contact:</string>
+    <string name="text_dev" >Nguyen Huu Nam</string>
 
     <string-array name="categories">
         <item>@string/category_programing</item>
