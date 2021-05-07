@@ -3,6 +3,7 @@ package com.example.itbook.ui.settings
 import android.widget.CompoundButton
 import com.example.itbook.R
 import com.example.itbook.base.BaseFragment
+import com.example.itbook.ui.infomation.AppInformationFragment
 import com.example.itbook.utils.MySharedPreferences
 import com.example.itbook.utils.restart
 import com.example.itbook.utils.setLanguage
@@ -25,6 +26,8 @@ class SettingsFragment : BaseFragment() {
 
     override fun initListeners() {
         switchLanguage.setOnCheckedChangeListener(onCheckedChangeListener)
+        textAppInfo.setOnClickListener { addFragment(AppInformationFragment()) }
+        imageInfo.setOnClickListener { addFragment(AppInformationFragment()) }
     }
 
     private fun setSwitch(language: String) {
