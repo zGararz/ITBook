@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.itbook">
+    package="com.sunasterisk.itbook">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -11,9 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ITBook">
-        <activity android:name=".ui.main.MainActivity" />
+        <activity android:name="com.sunasterisk.itbook.ui.main.MainActivity" />
         <activity
-            android:name=".ui.splash.SplashScreen"
+            android:name="com.sunasterisk.itbook.ui.splash.SplashScreen"
             android:theme="@style/Theme.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
