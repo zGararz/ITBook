@@ -14,7 +14,7 @@ import com.example.itbook.ui.adapter.PreviewCategoryAdapter
 import com.example.itbook.ui.detailbook.DetailBookFragment
 import com.example.itbook.ui.detailcategory.DetailCategoryFragment
 import com.example.itbook.ui.search.SearchFragment
-import com.example.itbook.utils.showError
+import com.example.itbook.utils.showMessage
 import kotlinx.android.synthetic.main.fragment_home.*
 import org.json.JSONException
 
@@ -68,18 +68,28 @@ class HomeFragment : BaseFragment(), HomeContract.View {
     override fun showError(error: Exception?) {
         error?.let {
             when (it) {
-                is JSONException -> activity?.showError(resources.getString(R.string.error_load_data))
-                else -> activity?.showError(error.toString())
+                is JSONException -> activity?.showMessage(resources.getString(R.string.error_load_data))
+                else -> activity?.showMessage(error.toString())
             }
         }
     }
 
     private fun onItemCategoryClick(position: Int) {
-        categories?.let { addFragment(DetailCategoryFragment.getInstance(it[position])) }
+        categories?.let {
+            addFragment(
+                DetailCategoryFragment.getInstance(it[position]),
+                R.anim.anim_slide_up,
+                R.anim.anim_slide_down
+            )
+        }
     }
 
     private fun onItemPreviewCategoryClick(position: Int) {
-        addFragment(DetailCategoryFragment.getInstance(previewCategories[position].name))
+        addFragment(
+            DetailCategoryFragment.getInstance(previewCategories[position].name),
+            R.anim.anim_slide_up,
+            R.anim.anim_slide_down
+        )
     }
 
     private fun onItemBookClick(currentCategory: Int, position: Int) {
@@ -87,7 +97,8 @@ class HomeFragment : BaseFragment(), HomeContract.View {
             DetailBookFragment.getInstance(
                 previewCategories[currentCategory].books[position].isbn13,
                 false
-            )
+            ),
+            R.anim.anim_push_in, R.anim.anim_push_out
         )
     }
 }

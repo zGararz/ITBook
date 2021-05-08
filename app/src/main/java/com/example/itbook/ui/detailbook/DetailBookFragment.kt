@@ -16,7 +16,7 @@ import com.example.itbook.ui.search.SearchFragment
 import com.example.itbook.ui.similar.SimilarBooksFragment
 import com.example.itbook.utils.LinkBuilder
 import com.example.itbook.utils.loadImageFromUri
-import com.example.itbook.utils.showError
+import com.example.itbook.utils.showMessage
 import kotlinx.android.synthetic.main.fragment_detail_book.*
 import kotlinx.android.synthetic.main.preview_category.view.*
 import org.json.JSONException
@@ -102,8 +102,8 @@ class DetailBookFragment : BaseFragment(), DetailBookContract.View {
     override fun showError(error: Exception?) {
         error?.let {
             when (it) {
-                is JSONException -> activity?.showError(resources.getString(R.string.error_load_data))
-                else -> activity?.showError(error.toString())
+                is JSONException -> activity?.showMessage(resources.getString(R.string.error_load_data))
+                else -> activity?.showMessage(error.toString())
             }
         }
     }
@@ -123,7 +123,11 @@ class DetailBookFragment : BaseFragment(), DetailBookContract.View {
     }
 
     private fun onItemBookClickListener(currentCategory: Int, position: Int) {
-        addFragment(getInstance(books[position].isbn13, false))
+        addFragment(
+            getInstance(books[position].isbn13, false),
+            R.anim.anim_push_in,
+            R.anim.anim_push_out
+        )
     }
 
     private fun onBackClickListener() {
@@ -143,7 +147,11 @@ class DetailBookFragment : BaseFragment(), DetailBookContract.View {
 
     private fun onSimilarBooksClickListener() {
         book?.let {
-            addFragment(SimilarBooksFragment.getInstance(it.title))
+            addFragment(
+                SimilarBooksFragment.getInstance(it.title),
+                R.anim.anim_push_in,
+                R.anim.anim_push_out
+            )
         }
     }
 

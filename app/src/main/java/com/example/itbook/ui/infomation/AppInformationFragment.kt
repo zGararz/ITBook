@@ -19,7 +19,7 @@ class AppInformationFragment : BaseFragment() {
 
     override fun initViews() {
         textVersion.text = BuildConfig.VERSION_NAME
-        LinkBuilder().build(textContact, resources.getString(R.string.facebook))
+        LinkBuilder().build(textContact, resources.getString(R.string.text_facebook))
     }
 
     override fun initData() {}
