@@ -17,6 +17,12 @@ class BooksRemoteDataSource private constructor(
         }.execute()
     }
 
+    override fun getRemoteBook(id: String, callback: OnDataLoadCallBack<Book>) {
+        LoadDataAsyncTask(callback) {
+            bookRemoteHandler.run { jsonsToBook(JSONObject(getJsonFromUrl(APIQuery.queryBook(id)))) }
+        }.execute()
+    }
+
     override fun getRemoteBooks(query: String, callback: OnDataLoadCallBack<List<Book>>) {
         LoadDataAsyncTask(callback) {
             bookRemoteHandler.run { jsonsToBooks(JSONObject(getJsonFromUrl(APIQuery.queryBooks(query)))) }
