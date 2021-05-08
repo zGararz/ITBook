@@ -17,7 +17,7 @@ import com.example.itbook.ui.settings.SettingsFragment
 import com.example.itbook.utils.MySharedPreferences
 import com.example.itbook.utils.closeKeyboard
 import com.example.itbook.utils.openKeyboard
-import com.example.itbook.utils.showError
+import com.example.itbook.utils.showMessage
 import kotlinx.android.synthetic.main.fragment_search.*
 import org.json.JSONException
 
@@ -83,8 +83,8 @@ class SearchFragment : BaseFragment(), SearchContract.View {
     override fun showError(error: Exception?) {
         error?.let {
             when (it) {
-                is JSONException -> activity?.showError(resources.getString(R.string.error_search))
-                else -> activity?.showError(error.toString())
+                is JSONException -> activity?.showMessage(resources.getString(R.string.error_search))
+                else -> activity?.showMessage(error.toString())
             }
         }
     }
@@ -120,7 +120,11 @@ class SearchFragment : BaseFragment(), SearchContract.View {
     }
 
     private fun onBookClick(position: Int) {
-        addFragment(DetailBookFragment.getInstance(books[position].isbn13, false))
+        addFragment(
+            DetailBookFragment.getInstance(books[position].isbn13, false),
+            R.anim.anim_push_in,
+            R.anim.anim_push_out
+        )
     }
 
     private fun onCancelClickListener() = activity?.supportFragmentManager?.popBackStack()

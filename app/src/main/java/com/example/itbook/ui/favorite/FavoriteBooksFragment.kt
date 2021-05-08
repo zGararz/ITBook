@@ -15,7 +15,7 @@ import com.example.itbook.data.source.remote.BooksRemoteDataSource
 import com.example.itbook.ui.adapter.PreviewBookAdapter
 import com.example.itbook.ui.detailbook.DetailBookFragment
 import com.example.itbook.utils.closeKeyboard
-import com.example.itbook.utils.showError
+import com.example.itbook.utils.showMessage
 import kotlinx.android.synthetic.main.fragment_favorite.*
 
 class FavoriteBooksFragment : BaseFragment(), FavoriteBooksContract.View {
@@ -84,11 +84,15 @@ class FavoriteBooksFragment : BaseFragment(), FavoriteBooksContract.View {
     }
 
     override fun showError(error: Exception?) {
-        error?.let { activity?.showError(it.toString()) }
+        error?.let { activity?.showMessage(it.toString()) }
     }
 
     private fun onBookClick(position: Int) {
-        addFragment(DetailBookFragment.getInstance(books[position].isbn13, true))
+        addFragment(
+            DetailBookFragment.getInstance(books[position].isbn13, true),
+            R.anim.anim_push_in,
+            R.anim.anim_push_out
+        )
     }
 
     @SuppressLint("DefaultLocale")

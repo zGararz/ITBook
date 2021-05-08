@@ -29,6 +29,9 @@
     <string name="text_favorite_books">Danh Sách Yêu Thích</string>
     <string name="text_default_books_count">cuốn.</string>
     <string name="text_search_result">kết quả tìm kiếm</string>
+    <string name="text_internet_on">Đã kết nối internet!</string>
+    <string name="text_internet_off">Mất kết nối internet!</string>
+
     <string name="error_internet_not_connection">Kiểm tra lại kết nối internet của bạn!</string>
     <string name="error_search">Không thể tìm kiếm</string>
     <string name="error_load_data">Không thể tải sách</string>

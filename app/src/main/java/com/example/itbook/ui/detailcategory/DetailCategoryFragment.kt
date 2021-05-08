@@ -15,7 +15,7 @@ import com.example.itbook.data.source.remote.BooksRemoteDataSource
 import com.example.itbook.ui.adapter.PreviewBookAdapter
 import com.example.itbook.ui.detailbook.DetailBookFragment
 import com.example.itbook.ui.search.SearchFragment
-import com.example.itbook.utils.showError
+import com.example.itbook.utils.showMessage
 import kotlinx.android.synthetic.main.fragment_detail_category.*
 import org.json.JSONException
 
@@ -72,14 +72,18 @@ class DetailCategoryFragment() : BaseFragment(),
     override fun showError(error: Exception?) {
         error?.let {
             when (it) {
-                is JSONException -> activity?.showError(resources.getString(R.string.error_load_data))
-                else -> activity?.showError(error.toString())
+                is JSONException -> activity?.showMessage(resources.getString(R.string.error_load_data))
+                else -> activity?.showMessage(error.toString())
             }
         }
     }
 
     private fun onBookClick(position: Int) {
-        addFragment(DetailBookFragment.getInstance(books[position].isbn13, false))
+        addFragment(
+            DetailBookFragment.getInstance(books[position].isbn13, false),
+            R.anim.anim_push_in,
+            R.anim.anim_push_out
+        )
     }
 
     private fun onBackClickListener() {

@@ -37,22 +37,25 @@ abstract class BaseFragment : Fragment() {
         fragment: Fragment,
         enter: Int,
         exit: Int,
-        popEnter: Int,
-        popExit: Int
     ) {
-        activity?.supportFragmentManager
-            ?.beginTransaction()
-            ?.add(R.id.frameRoot, fragment)
-            ?.setCustomAnimations(enter, exit, popEnter, popExit)
-            ?.commit()
+        activity?.apply {
+            supportFragmentManager
+                .beginTransaction()
+                .setCustomAnimations(enter, 0, 0, exit)
+                .replace(R.id.frameRoot, fragment)
+                .addToBackStack(null)
+                .commit()
+        }
     }
 
     protected fun addFragment(fragment: Fragment) {
-        activity?.supportFragmentManager
-            ?.beginTransaction()
-            ?.replace(R.id.frameRoot, fragment)
-            ?.addToBackStack(null)
-            ?.commit()
+        activity?.apply {
+            supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.frameRoot, fragment)
+                .addToBackStack(null)
+                .commit()
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.R)

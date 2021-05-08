@@ -34,7 +34,9 @@
     <string name="text_language_en" translatable="false">En</string>
     <string name="text_language_vi" translatable="false">Vi</string>
     <string name="text_dev" translatable="false">Nguyen Huu Nam</string>
-    <string name="facebook" translatable="false">https://www.facebook.com/zGararz</string>
+    <string name="text_facebook" translatable="false">https://www.facebook.com/zGararz</string>
+    <string name="text_internet_on">Internet is connected!</string>
+    <string name="text_internet_off">Internet is not connected!</string>
 
     <string name="error_internet_not_connection">Check your internet connection!</string>
     <string name="error_search">can\'t search</string>
