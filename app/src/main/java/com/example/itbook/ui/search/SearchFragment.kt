@@ -13,6 +13,8 @@ import com.example.itbook.data.source.remote.BookRemoteHandler
 import com.example.itbook.data.source.remote.BooksRemoteDataSource
 import com.example.itbook.ui.adapter.PreviewBookAdapter
 import com.example.itbook.ui.detailbook.DetailBookFragment
+import com.example.itbook.ui.settings.SettingsFragment
+import com.example.itbook.utils.MySharedPreferences
 import com.example.itbook.utils.closeKeyboard
 import com.example.itbook.utils.openKeyboard
 import com.example.itbook.utils.showError
@@ -89,7 +91,16 @@ class SearchFragment : BaseFragment(), SearchContract.View {
 
     private fun onSearchListener(search: EditText) {
         val query = search.text.toString()
-        val titleSearch = "\"${search.text}\" ${resources.getString(R.string.text_search_result)}"
+        val language = context?.let {
+            MySharedPreferences.getInstance(it).getString(
+                SettingsFragment.STRING_LANGUAGE, resources.getString(R.string.text_language_en)
+            )
+        }
+        val titleSearch = if (language == resources.getString(R.string.text_language_en)) {
+            "\"${search.text}\" ${resources.getString(R.string.text_search_result)}"
+        } else {
+            "${resources.getString(R.string.text_search_result)} \"${search.text}\""
+        }
 
         textTitleSearch.text = titleSearch
         if (isFirstSearch) {

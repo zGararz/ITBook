@@ -16,7 +16,6 @@ class MainActivity() : BaseActivity() {
 
     private val favoriteFragment = FavoriteBooksFragment()
     private val homeFragment = HomeFragment()
-    private val settingsFragment = SettingsFragment()
     override fun initComponents() {
         bottomNav.setOnNavigationItemSelectedListener(onBottomNavigationListener)
         bottomNav.selectedItemId = R.id.menuHome
@@ -27,7 +26,7 @@ class MainActivity() : BaseActivity() {
             when (it.itemId) {
                 R.id.menuFavoriteBooks -> replaceFragment(favoriteFragment)
                 R.id.menuHome -> replaceFragment(homeFragment)
-                R.id.menuSettings -> replaceFragment(settingsFragment)
+                R.id.menuSettings -> replaceFragment(SettingsFragment())
             }
             true
         }
