@@ -29,7 +29,7 @@
     <string name="text_isbn10_book" translatable="false">isbn10</string>
     <string name="text_isbn13_book" translatable="false">isbn13</string>
     <string name="text_favorite_books">Your Favorite Books</string>
-    <string name="text_default_books_count">book.</string>
+    <string name="text_default_books_count">books.</string>
     <string name="text_search_result">search result</string>
     <string name="text_language_en" translatable="false">En</string>
     <string name="text_language_vi" translatable="false">Vi</string>

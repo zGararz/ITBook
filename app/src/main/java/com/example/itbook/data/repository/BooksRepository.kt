@@ -12,6 +12,10 @@ class BooksRepository private constructor(
         remote.getNewsBook(callback)
     }
 
+    override fun getRemoteBook(id: String, callback: OnDataLoadCallBack<Book>) {
+        remote.getRemoteBook(id, callback)
+    }
+
     override fun getRemoteBooks(query: String, callback: OnDataLoadCallBack<List<Book>>) {
         remote.getRemoteBooks(query, callback)
     }

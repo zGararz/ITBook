@@ -23,11 +23,11 @@ class DetailBookPresenter(
 
     override fun getRemoteBook(id: String) {
         view.showLoading()
-        repository.getRemoteBooks(id, object : OnDataLoadCallBack<List<Book>> {
-            override fun onSuccess(data: List<Book>) {
-                view.showBook(data[0])
+        repository.getRemoteBook(id, object : OnDataLoadCallBack<Book> {
+            override fun onSuccess(data: Book) {
+                view.showBook(data)
                 view.hideLoading()
-                book = data[0]
+                book = data
 
                 book?.title?.let { getSimilarBooks(it) }
             }
