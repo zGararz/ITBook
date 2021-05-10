@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="@dimen/dp_20">
+
+    <ImageView
+        android:id="@+id/imageBook"
+        android:layout_width="@dimen/dp_120"
+        android:layout_height="0dp"
+        android:background="@drawable/square_radius_1"
+        android:contentDescription="@string/title_book"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toTopOf="@id/textTitleBook"
+        app:layout_constraintDimensionRatio="6:7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/textTitleBook"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_5"
+        android:ellipsize="end"
+        android:lines="2"
+        android:maxLines="2"
+        android:text="@string/title_book"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageBook" />
+</androidx.constraintlayout.widget.ConstraintLayout>
