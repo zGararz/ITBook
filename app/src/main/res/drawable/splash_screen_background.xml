@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
+<<<<<<< HEAD
     <item android:drawable="@color/color_dark_blue" />
+=======
+    <item android:drawable="@color/color_chathams_blue" />
+>>>>>>> 55c39fd3521714c15a3ab600b7c82bf0d309f370
     <item
         android:width="150dp"
         android:height="55dp"
