@@ -2,12 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.ITBook" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-<<<<<<< HEAD
-        <item name="colorPrimaryVariant">@android:color/transparent</item>
-=======
         <item name="colorPrimaryVariant">@color/color_maroon_flush</item>
->>>>>>> 55c39fd3521714c15a3ab600b7c82bf0d309f370
         <item name="colorOnPrimary">@android:color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/color_mine_shaft</item>
